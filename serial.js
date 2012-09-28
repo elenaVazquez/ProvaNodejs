@@ -1,7 +1,13 @@
 
-function serial(val) {
-	var r = JSON.stringify(val);
-	
+function parse(val) {
+	var r = JSON.parse(val);
+	return r;
 }
 
-exports.serial = serial;
+function stringify(val, ret) {
+	var r = JSON.stringify(val);
+	ret(r);
+}
+
+exports.parse = parse;
+exports.stringify = stringify;

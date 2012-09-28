@@ -2,7 +2,7 @@ var http = require("http");
 var url = require('url');
 var q = require("querystring");
 
-function init(route, handler, serial) {
+function init(route, handle, serial) {
 	
 	function onRequest(request, response) {
 		//per rebre les dades en utf-8
@@ -11,7 +11,7 @@ function init(route, handler, serial) {
 		//agafem la informació de la url 
 		var urlInfo = url.parse(request.url, true);
 	
-		if(request.method == 'GET'){
+		/*if(request.method == 'GET'){
 			//agafem els parametres de la url amb els que volem realitzar l'operació 
 			var val1 = parseInt(urlInfo.query.par1);
 			var val2 = parseInt(urlInfo.query.par2);
@@ -22,7 +22,7 @@ function init(route, handler, serial) {
 																	response.write(result);
 															        response.end();
 																});
-		}
+		}*/
 		
 		if(request.method == 'POST') {
 			var params = '';
@@ -32,11 +32,12 @@ function init(route, handler, serial) {
 			});
 
 			request.addListener('end', function () {
-				var dataPOST = JSON.parse(params);
-				var val1 = parseInt(dataPOST.par1);
-				var val2 = parseInt(dataPOST.par2);
+				//var dataPOST = JSON.parse(params);
+				//var val1 = parseInt(dataPOST.par1);
+				//var val2 = parseInt(dataPOST.par2);
 
-				route(serial, handle, urlInfo.pathname, val1, val2, function (result) {
+				route(serial, handle, urlInfo.pathname, params, function (result) {
+																console.log(result);
 					 											response.writeHead(200, {});
 					 											response.write(result);
 					 									        response.end();
@@ -48,50 +49,4 @@ function init(route, handler, serial) {
 }
 exports.init = init;
 
-
-
-/*
-server.on('request', function(req,res){
-	res.writeHead(200, {"Content-Type": "text/html"});
-	if(req.method == 'GET'){
-		
-		var val1 = parseInt(url_info.query.par1);
-		var val2 = parseInt(url_info.query.par2);
-		
-		switch(url_info.pathname){
-			
-			case '/sum':
-				var aux= val1+val2;
-				res.write("El resultat de la suma:"+val1+"+"+val2+"="+aux+";");
-				break;
-			
-			case '/res':
-				var aux= val1-val2;
-				res.write("El resultat de la resta:"+val1+"-"+val2+"="+aux+";");
-				break;
-			
-			case '/mul':
-				var aux= val1*val2;
-				res.write("El resultat de la multiplicacio:"+val1+"*"+val2+"="+aux+";");
-				break;
-			
-			case '/div':
-				var aux= val1/val2;
-				res.write("El resultat de la divisio:"+val1+"/"+val2+"="+aux+";");
-				break;
-			
-			/*case '/':
-				res.writeHead(200, {"Content-Type": "text/html"});
-				res.write("ERROR");
-				break;
-		}
-		
-		res.end();
-	}
-	if(req.method == 'POST'){
-		res.writeHead(200, {"Content-Type": "text/html"});
-		res.write("e");
-	}
-	
-});*/
 

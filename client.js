@@ -1,8 +1,7 @@
 
-var querystring = require('querystring');  
 var http = require('http');  
   
-var post_data = querystring.stringify({  
+var post_data = JSON.stringify({  
 	'par1' : 2,  
 	'par2': 3  
 });  
@@ -10,7 +9,7 @@ var post_data = querystring.stringify({
 var post_options = {  
 	 host: 'localhost',  
 	 port: 8888,  
-	 path: 'http://prova.cat/sum',  
+	 path: '/res',  
 	 method: 'POST',  
 	 headers: {  
 		 'Content-Type': 'application/x-www-form-urlencoded',  
@@ -26,5 +25,6 @@ var post_req = http.request(post_options, function(res) {
 	});  
 });  
     
+//console.log(data);
 post_req.write(post_data);  
 post_req.end();  
