@@ -1,20 +1,21 @@
-function sum(val1, val2, response) {
+
+function sum(val1, val2, res) {
 	var result = val1+val2;
-	response(result);
+	res(result);
 }
 
-function res(val1, val2, response) {
+function res(val1, val2, res) {
 	var result = val1-val2;
-	response(result);
+	res(result);
 }
-function mul(val1, val2, response) {
+function mul(val1, val2, res) {
 	var result = val1*val2;
-	response(result);
+	res(result);
 }
 
-function div(val1, val2, response) {
+function div(val1, val2, res) {
 	var result = val1/val2;
-	response(result);
+	res(result);
 }
 
 exports.sum = sum;
